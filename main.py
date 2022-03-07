@@ -1,6 +1,10 @@
 import sys
 import math
 import PyQt5.QtWidgets as qtw
+import PyQt5.QtGui as qtg
+import PyQt5.QtCore as qtc
+
+from pages import calc
 
 list = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'       # для быстрого перевода
 
@@ -77,113 +81,62 @@ def float_to_provided(float_number: float, base: str) -> str:
     return str(integral_converted + '.' + fractional_converted)
 
 
-class MainWindow(qtw.QWidget):
-    """
-    Класс для реализации графического интерфейса.
-    Также выполняются арифметические операции, после перевода в 10-ую
-    """
+class App(qtw.QMainWindow, calc.Ui_mainWindow):
+    def __init__(self, parent=None):
+        super(App, self).__init__(parent)
+        self.setupUi(self)
+        self.stackedWidget.setCurrentIndex(0)
+        self.calculate_button.clicked.connect(self.calculate)
 
-    def __init__(self):
-        """
-        Задаётся окно размером 300x600, создаются поля для ввода
-        """
+    def calculate(self):
+        n_ = self.num_1.text()
+        m_ = self.num_2.text()
+        base_1_ = self.base_1.text()
+        base_2_ = self.base_2.text()
+        base_3_ = self.base_3.text()
+        oper_ = self.oper.text()
 
-        super().__init__()
-        self.setWindowTitle("Калькулятор Баслин Ярослав БПМ-20-3")
-        self.setGeometry(300, 300, 600, 600)
-        self.setLayout(qtw.QVBoxLayout())
+        try:
+            n_ = to_decimal(n_, base_1_)
+            m_ = to_decimal(m_, base_2_)
 
-        my_label_1 = qtw.QLabel("Введите первое число:")
-        self.layout().addWidget(my_label_1)
-        n = qtw.QLineEdit()
-        self.layout().addWidget(n)
+        except RuntimeError:
+            m_ = None
+            n_ = None
+            self.label_ans.setText("Неверное основание для чисел")
 
-        my_label_6 = qtw.QLabel("Введите систему исчисления для 1:")
-        self.layout().addWidget(my_label_6)
-        base_1 = qtw.QLineEdit()
-        self.layout().addWidget(base_1)
+        except AttributeError:
+            self.label_ans.setText("Неверное основание для ")
 
-        my_label_2 = qtw.QLabel("Введите второе число:")
-        self.layout().addWidget(my_label_2)
-        m = qtw.QLineEdit()
-        self.layout().addWidget(m)
+        if m_ is not None and n_ is not None:
+            if m_ == '0' and oper_ == '/':
+                self.label_ans.setText('Деление на 0')
 
-        my_label_3 = qtw.QLabel("Введите систему исчисления для 2:")
-        self.layout().addWidget(my_label_3)
-        base_2 = qtw.QLineEdit()
-        self.layout().addWidget(base_2)
+            elif int(n_) < int(m_) and oper_ == '-':
+                ans = eval(str(m_) + oper_ + str(n_))
+                strr = number_to_provided(ans, base_3_)
+                self.label_ans.setText(f'Ответ: {strr}')
 
-        my_label_4 = qtw.QLabel("Операция:")
-        self.layout().addWidget(my_label_4)
-        oper = qtw.QLineEdit()
-        self.layout().addWidget(oper)
+            elif oper_ != '+' and oper_ != '-' and oper_ != '*' and oper_ != '/':
+                self.label_ans.setText("Неизвестная операция")
 
-        my_label_5 = qtw.QLabel("Введите систему исчисления результата:")
-        self.layout().addWidget(my_label_5)
-        base_3 = qtw.QLineEdit()
-        self.layout().addWidget(base_3)
+            elif int(m_) != 0 and int(n_) % int(m_) != 0 and oper_ == '/':
+                ans = eval(str(n_) + oper_ + str(m_))
+                strr = float_to_provided(ans, base_3_)
+                self.label_ans.setText(f'Ответ {strr}')
 
-        my_button = qtw.QPushButton("Посчитать", clicked=lambda: button_event())
-        self.layout().addWidget(my_button)
-
-        my_label_ = qtw.QLabel("Ответ:")
-        self.layout().addWidget(my_label_)
-
-        self.show()
-
-        def button_event():
-            """Получаем значения полей, выполняем операцию, проверка на невалидность операций."""
-            n_ = n.text()
-            m_ = m.text()
-            base_1_ = base_1.text()
-            base_2_ = base_2.text()
-            base_3_ = base_3.text()
-            oper_ = oper.text()
-
-            try:
-                n_ = to_decimal(n_, base_1_)
-                m_ = to_decimal(m_, base_2_)
-
-            except RuntimeError:
-                m_ = None
-                n_ = None
-                my_label_1.setText("Неверное основание для чисел")
-
-            except AttributeError:
-                my_label_1.setText("Неверное основание для ")
-
-            if m_ is not None and n_ is not None:
-                if m_ == '0' and oper_ == '/':
-                    my_label_.setText('Деление на 0')
-
-                elif int(n_) < int(m_) and oper_ == '-':
-                    ans = eval(str(m_) + oper_ + str(n_))
-                    strr = number_to_provided(ans, base_3_)
-                    my_label_.setText(f'Ответ: {strr}')
-
-                elif oper_ != '+' and oper_ != '-' and oper_ != '*' and oper_ != '/':
-                    my_label_.setText("Неизвестная операция")
-
-                elif int(m_) != 0 and int(n_) % int(m_) != 0 and oper_ == '/':
-                    ans = eval(str(n_) + oper_ + str(m_))
-                    strr = float_to_provided(ans, base_3_)
-                    my_label_.setText(f'Ответ {strr}')
-
-                else:
-                    ans = eval(str(n_) + oper_ + str(m_))
-                    strr = number_to_provided(ans, base_3_)
-                    my_label_.setText(f'Ответ: {strr}')
+            else:
+                ans = eval(str(n_) + oper_ + str(m_))
+                strr = number_to_provided(ans, base_3_)
+                self.label_ans.setText(f'Ответ: {strr}')
 
 
 def main():
     app = qtw.QApplication(sys.argv)
-    window = MainWindow()
-
-    sys.exit(app.exec_())
+    form = App()
+    form.show()
+    app.exec_()
 
 
 if __name__ == "__main__":
     main()
-
-
-
