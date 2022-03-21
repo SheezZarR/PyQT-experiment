@@ -85,8 +85,24 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
     def __init__(self, parent=None):
         super(App, self).__init__(parent)
         self.setupUi(self)
-        self.stackedWidget.setCurrentIndex(0)
+        self.main_stack.setCurrentIndex(0)
+
+        self.open_calc.clicked.connect(self.open_calculator)
+        self.open_comb.clicked.connect(self.open_combinatorics)
+
+        self.main_menu_button.clicked.connect(self.open_main_menu)
         self.calculate_button.clicked.connect(self.calculate)
+
+    def open_main_menu(self):
+        self.main_stack.setCurrentIndex(0)
+
+    def open_calculator(self):
+        self.main_stack.setCurrentIndex(1)
+
+    def open_combinatorics(self):
+        self.main_stack.setCurrentIndex(2)
+        self.combinatoric_stack.setCurrentIndex(0)
+
 
     def calculate(self):
         n_ = self.num_1.text()
