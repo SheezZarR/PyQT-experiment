@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>411</height>
+    <width>639</width>
+    <height>421</height>
    </rect>
   </property>
   <property name="font">
@@ -53,6 +53,9 @@
         <widget class="QLabel" name="main_page_label">
          <property name="text">
           <string>Меню управления</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="wordWrap">
           <bool>false</bool>
@@ -347,10 +350,10 @@
         <x>-1</x>
         <y>-1</y>
         <width>641</width>
-        <height>381</height>
+        <height>391</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="Combinatorics">
+      <layout class="QGridLayout" name="gridLayout_3">
        <property name="leftMargin">
         <number>6</number>
        </property>
@@ -363,7 +366,21 @@
        <property name="bottomMargin">
         <number>6</number>
        </property>
-       <item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="comb_calculate_button">
+         <property name="text">
+          <string>Посчитать</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="comb_main_menu_button">
+         <property name="text">
+          <string>Вернуться</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
         <widget class="QComboBox" name="comboBox">
          <item>
           <property name="text">
@@ -397,7 +414,14 @@
          </item>
         </widget>
        </item>
-       <item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="comb_ans_box">
+         <property name="text">
+          <string>Ответ:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
         <widget class="QStackedWidget" name="combinatoric_stack">
          <property name="currentIndex">
           <number>1</number>
@@ -409,7 +433,7 @@
              <x>0</x>
              <y>0</y>
              <width>631</width>
-             <height>221</height>
+             <height>151</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -469,138 +493,130 @@ p, li { white-space: pre-wrap; }
               </item>
              </layout>
             </item>
-            <item>
-             <widget class="Line" name="line">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="perm_calc_button">
-              <property name="text">
-               <string>Посчитать</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <widget class="QLabel" name="answer_perm_label">
-                <property name="text">
-                 <string>Ответ:</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
            </layout>
           </widget>
          </widget>
          <widget class="QWidget" name="permutation_n_k">
-          <widget class="QWidget" name="verticalLayoutWidget_6">
+          <widget class="QScrollArea" name="scrollArea">
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-1</y>
              <width>631</width>
-             <height>291</height>
+             <height>228</height>
             </rect>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <property name="spacing">
-             <number>6</number>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>629</width>
+              <height>226</height>
+             </rect>
             </property>
-            <property name="sizeConstraint">
-             <enum>QLayout::SetNoConstraint</enum>
-            </property>
-            <property name="leftMargin">
-             <number>5</number>
-            </property>
-            <property name="topMargin">
-             <number>5</number>
-            </property>
-            <property name="rightMargin">
-             <number>5</number>
-            </property>
-            <property name="bottomMargin">
-             <number>5</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="task_label_4">
-              <property name="text">
-               <string>Задача</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextBrowser" name="task_text_4">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>120</height>
-               </size>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetNoConstraint</enum>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>5</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="task_label_4">
+                 <property name="text">
+                  <string>Задача</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QTextBrowser" name="task_text_4">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>120</height>
+                  </size>
+                 </property>
+                 <property name="html">
+                  <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Open Sans,sans-serif'; color:#000000; background-color:#ffffff;&quot;&gt;Сколькими способами можно переставить n, предметов, расположенных на n различных местах, если среди n предметов имеются k различных типов (есть одинаковые предметы)&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Open Sans,sans-serif'; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="Line" name="line_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <item>
-               <widget class="QLabel" name="nLabel_perm_n_k">
-                <property name="text">
-                 <string>n=</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="nInput_perm_n_k"/>
-              </item>
-              <item>
-               <widget class="QLabel" name="mLabel_perm_n_k">
-                <property name="text">
-                 <string>m=</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="mInput_perm_n_k"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_5">
-              <property name="text">
-               <string>Посчитать</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <item>
-               <widget class="QLabel" name="answer_label_4">
-                <property name="text">
-                 <string>Ответ:</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Open Sans,sans-serif'; color:#000000; background-color:#ffffff;&quot;&gt;Сколькими способами можно переставить n, предметов, расположенных на n различных местах, если среди n предметов имеются k различных типов&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                 <item>
+                  <widget class="QLabel" name="nLabel_perm_n_k">
+                   <property name="text">
+                    <string>n=</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="nInput_perm_n_k"/>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="add_k_type">
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>12</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Добавить тип</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="remove_k_type">
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>12</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Удалить тип</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="3" column="0">
+                <layout class="QFormLayout" name="form_with_types"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </widget>
          <widget class="QWidget" name="partial_permutation">
@@ -610,7 +626,7 @@ p, li { white-space: pre-wrap; }
              <x>0</x>
              <y>0</y>
              <width>631</width>
-             <height>255</height>
+             <height>181</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -684,35 +700,17 @@ p, li { white-space: pre-wrap; }
               </item>
              </layout>
             </item>
-            <item>
-             <widget class="QPushButton" name="calc_partial_perm_button">
-              <property name="text">
-               <string>Посчитать</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_6">
-              <item>
-               <widget class="QLabel" name="answer_part_perm_label">
-                <property name="text">
-                 <string>Ответ:</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
            </layout>
           </widget>
          </widget>
-         <widget class="QWidget" name="partial_permutation_repeatable">
+         <widget class="QWidget" name="partial_permutation_duplicates">
           <widget class="QWidget" name="verticalLayoutWidget_8">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
              <width>631</width>
-             <height>291</height>
+             <height>181</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -786,24 +784,6 @@ p, li { white-space: pre-wrap; }
               </item>
              </layout>
             </item>
-            <item>
-             <widget class="QPushButton" name="calc_rpart_perm_button">
-              <property name="text">
-               <string>Посчитать</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <item>
-               <widget class="QLabel" name="answer_rpart_perm_button">
-                <property name="text">
-                 <string>Ответ:</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
            </layout>
           </widget>
          </widget>
@@ -814,7 +794,7 @@ p, li { white-space: pre-wrap; }
              <x>0</x>
              <y>0</y>
              <width>631</width>
-             <height>255</height>
+             <height>181</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -888,35 +868,17 @@ p, li { white-space: pre-wrap; }
               </item>
              </layout>
             </item>
-            <item>
-             <widget class="QPushButton" name="calc_comb_button">
-              <property name="text">
-               <string>Посчитать</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QLabel" name="answer_comb_label">
-                <property name="text">
-                 <string>Ответ:</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
            </layout>
           </widget>
          </widget>
-         <widget class="QWidget" name="combination_repeatable">
+         <widget class="QWidget" name="combination_duplicates">
           <widget class="QWidget" name="verticalLayoutWidget_7">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
              <width>631</width>
-             <height>255</height>
+             <height>181</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -990,34 +952,9 @@ p, li { white-space: pre-wrap; }
               </item>
              </layout>
             </item>
-            <item>
-             <widget class="QPushButton" name="calc_rcomb_button">
-              <property name="text">
-               <string>Посчитать</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QLabel" name="answer_rcomb_label">
-                <property name="text">
-                 <string>Ответ:</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
            </layout>
           </widget>
          </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="comb_main_menu_button">
-         <property name="text">
-          <string>Вернуться</string>
-         </property>
         </widget>
        </item>
       </layout>
@@ -1030,7 +967,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>640</width>
+     <width>639</width>
      <height>29</height>
     </rect>
    </property>

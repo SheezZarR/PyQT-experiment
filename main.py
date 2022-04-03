@@ -5,83 +5,12 @@ import PyQt5.QtGui as qtg
 import PyQt5.QtCore as qtc
 
 from pages import calc
-
-list = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'       # для быстрого перевода
-
-
-# Перевод ИЗ любой СИ в десятичную
-def to_decimal(number: str, base: str) -> str:
-    base = int(base)
-    number = number[::-1]
-    number_rez = 0
-
-    for i in range(len(number)):
-        if list.index(number[i]) >= base or base == 1:
-            raise RuntimeError()
-
-        number_rez += list.index(number[i]) * base ** i
-
-    return number_rez
-
-
-# Перевод в любую СИ путём деления и получения остатка из 10
-def number_to_provided(number: str, base: str) -> str:
-    """Перевод числа в основание со значением base. """
-
-    base = int(base)
-    number = int(number)    # для перевода
-    number_rez = ''         # хранится число
-
-    if base == 1:
-        raise AttributeError()
-
-    while number // base != 0:
-        number_rez += str(list[number % base])
-        number = number // base
-
-    number_rez += str(list[number % base])  # последняя цифра
-    number_rez = number_rez[::-1]           # разворачиваем число, оно записано слева направо, вместо 225 522
-
-    # убираем ведущие нули в числе
-    zero_counter = 0
-    while number_rez[zero_counter] == '0':
-        zero_counter += 1
-        if zero_counter >= len(number_rez):
-            zero_counter -= 1
-            break
-
-    return number_rez[zero_counter::]       # возвращаем число в виде строки, с удалением ведущих нулей
-
-
-# Перевод в любую СИ путём деления и получения остатка из 10
-# + перевод дробной части.
-def float_to_provided(float_number: float, base: str) -> str:
-    base = float(base)
-    float_number_ = float_number
-    integral_part = int(float_number_)
-    fractional_part = float_number_ - integral_part
-
-    integral_converted = number_to_provided(str(integral_part), base)
-    fractional_converted = ""
-    for i in range(0, 23):
-        fractional_part *= base
-
-        if int(fractional_part) >= 0:
-            fractional_converted += list[int(fractional_part)]
-            fractional_part -= int(fractional_part)
-
-        else:
-            fractional_converted += '0'
-
-        if math.isclose(fractional_part, 0, rel_tol=1e-09, abs_tol=0.0):
-            break
-
-    print(integral_converted + '.' + fractional_converted)
-
-    return str(integral_converted + '.' + fractional_converted)
+from modules import number_systems, combinatorics
 
 
 class App(qtw.QMainWindow, calc.Ui_mainWindow):
+    """PyQT app window."""
+
     def __init__(self, parent=None):
         super(App, self).__init__(parent)
         self.setupUi(self)
@@ -91,7 +20,12 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         self.open_comb.clicked.connect(self.open_combinatorics)
 
         self.main_menu_button.clicked.connect(self.open_main_menu)
-        self.calculate_button.clicked.connect(self.calculate)
+        self.comb_main_menu_button.clicked.connect(self.open_main_menu)
+        self.calculate_button.clicked.connect(self.number_transform)
+        self.comb_calculate_button.clicked.connect(self.calc_combinatorics)
+        self.add_k_type.clicked.connect(self.add_new_k_type)
+        self.remove_k_type.clicked.connect(self.remove_new_k_type)
+
 
     def open_main_menu(self):
         self.main_stack.setCurrentIndex(0)
@@ -102,9 +36,75 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
     def open_combinatorics(self):
         self.main_stack.setCurrentIndex(2)
         self.combinatoric_stack.setCurrentIndex(0)
+        self.comboBox.currentIndexChanged.connect(self.change_combo_stack)
 
+    def change_combo_stack(self, page_id):
+        self.combinatoric_stack.setCurrentIndex(page_id)
 
-    def calculate(self):
+    def add_new_k_type(self):
+        self.form_with_types.addRow(
+            qtw.QLabel(f"Тип {self.form_with_types.rowCount()}, кол-во: "),
+            qtw.QLineEdit()
+        )
+
+    def remove_new_k_type(self):
+        self.form_with_types.removeRow(self.form_with_types.rowCount() - 1)
+
+    def calc_combinatorics(self):
+        ans = 0
+
+        if self.combinatoric_stack.currentIndex() == 0:
+            ans = combinatorics.permutations(len(set(self.alphabet_input.text().split(" "))))
+
+        elif self.combinatoric_stack.currentIndex() == 1:
+            if self.form_with_types.rowCount() > 1:
+                numbers_of_types = []
+                sum = 0
+                total_n = int(self.nInput_perm_n_k.text())
+
+                for i in range(self.form_with_types.rowCount()):
+                    amount = int(self.form_with_types.itemAt(i, 1).widget().text())
+                    numbers_of_types.append(amount)
+                    sum += amount
+
+                if total_n == sum:
+
+                    ans = combinatorics.permutations_duplicates(
+                        total_n,
+                        numbers_of_types
+                    )
+                else:
+                    ans = "не совпадает количество предметов общее и под частям."
+            else:
+                ans = "необходимо добавить более двух типов предметов."
+
+        elif self.combinatoric_stack.currentIndex() == 2:
+            ans = combinatorics.partial_permutation(
+                int(self.nInput_partial.text()),
+                int(self.mInput_partial.text())
+            )
+
+        elif self.combinatoric_stack.currentIndex() == 3:
+            ans = combinatorics.partial_permutation_dubplicates(
+                int(self.nInput_rpartial.text()),
+                int(self.mInput_rpartial.text())
+            )
+
+        elif self.combinatoric_stack.currentIndex() == 4:
+            ans = combinatorics.combinations(
+                int(self.nInput_comb.text()),
+                int(self.mInput_comb.text())
+            )
+
+        elif self.combinatoric_stack.currentIndex() == 5:
+            ans = combinatorics.combinations_duplicates(
+                int(self.nInput_rcomb.text()),
+                int(self.mInput_rcomb.text())
+            )
+
+        self.comb_ans_box.setText(f"Ответ: {ans}")
+
+    def number_transform(self):
         n_ = self.num_1.text()
         m_ = self.num_2.text()
         base_1_ = self.base_1.text()
@@ -113,8 +113,8 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         oper_ = self.oper.text()
 
         try:
-            n_ = to_decimal(n_, base_1_)
-            m_ = to_decimal(m_, base_2_)
+            n_ = number_systems.to_decimal(n_, base_1_)
+            m_ = number_systems.to_decimal(m_, base_2_)
 
         except RuntimeError:
             m_ = None
@@ -130,7 +130,7 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
 
             elif int(n_) < int(m_) and oper_ == '-':
                 ans = eval(str(m_) + oper_ + str(n_))
-                strr = number_to_provided(ans, base_3_)
+                strr = number_systems.number_to_provided(ans, base_3_)
                 self.label_ans.setText(f'Ответ: {strr}')
 
             elif oper_ != '+' and oper_ != '-' and oper_ != '*' and oper_ != '/':
@@ -138,12 +138,12 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
 
             elif int(m_) != 0 and int(n_) % int(m_) != 0 and oper_ == '/':
                 ans = eval(str(n_) + oper_ + str(m_))
-                strr = float_to_provided(ans, base_3_)
+                strr = number_systems.float_to_provided(ans, base_3_)
                 self.label_ans.setText(f'Ответ {strr}')
 
             else:
                 ans = eval(str(n_) + oper_ + str(m_))
-                strr = number_to_provided(ans, base_3_)
+                strr = number_systems.number_to_provided(ans, base_3_)
                 self.label_ans.setText(f'Ответ: {strr}')
 
 
