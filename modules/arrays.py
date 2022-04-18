@@ -1,5 +1,6 @@
 """Implementation of an array: via bidirectional lists and via built-in array."""
 from __future__ import annotations
+from pages import calc
 
 
 class Node:
@@ -105,10 +106,16 @@ class NodeArray:
     def remove(self) -> None:
         start = self._head
 
-        for i in range(self._logic_size - 1):
-            start = start.get_next_node()
+        if self._logic_size == 1:
+            self._head = None
 
-        start.set_next_node(None)
+        else:
+            for i in range(self._logic_size - 1):
+                start = start.get_next_node()
+
+            start.set_next_node(None)
+
+        self._logic_size -= 1
 
     def remove_at(self, pos: int) -> None:
         if pos == 0:
@@ -117,8 +124,13 @@ class NodeArray:
         else:
             start = self._head
 
-            for i in range(self.pos - 1):
+            for i in range(pos - 1):
+                start = start.get_next_node()
 
+            if pos == self._logic_size:
+                start.set_next_node(None)
+            else:
+                start.set_next_node(start.get_next_node().get_next_node())
 
     def is_empty(self) -> bool:
         return True if self._logic_size == 0 else False
@@ -172,6 +184,7 @@ class CommonArray:
         if self.is_empty():
             raise RuntimeError("Container is empty!")
 
+        self._logic_size -= 1
         self._data.remove(self._data[item_pos])
 
     def is_empty(self) -> bool:

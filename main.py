@@ -5,11 +5,14 @@ import PyQt5.QtGui as qtg
 import PyQt5.QtCore as qtc
 
 from pages import calc
-from modules import number_systems, combinatorics
+from modules import number_systems, combinatorics, arrays
 
 
 class App(qtw.QMainWindow, calc.Ui_mainWindow):
     """PyQT app window."""
+
+    node_array = arrays.NodeArray()
+    common_array = arrays.CommonArray()
 
     def __init__(self, parent=None):
         super(App, self).__init__(parent)
@@ -18,14 +21,18 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
 
         self.open_calc.clicked.connect(self.open_calculator)
         self.open_comb.clicked.connect(self.open_combinatorics)
+        self.open_arrs.clicked.connect(self.open_arrays)
 
         self.main_menu_button.clicked.connect(self.open_main_menu)
         self.comb_main_menu_button.clicked.connect(self.open_main_menu)
+        self.arrays_main_menu_button.clicked.connect(self.open_main_menu)
+
         self.calculate_button.clicked.connect(self.number_transform)
         self.comb_calculate_button.clicked.connect(self.calc_combinatorics)
+        self.execute_nd.clicked.connect(self.nd_act)
+        self.execute_arr.clicked.connect(self.arr_act)
         self.add_k_type.clicked.connect(self.add_new_k_type)
         self.remove_k_type.clicked.connect(self.remove_new_k_type)
-
 
     def open_main_menu(self):
         self.main_stack.setCurrentIndex(0)
@@ -38,8 +45,108 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         self.combinatoric_stack.setCurrentIndex(0)
         self.comboBox.currentIndexChanged.connect(self.change_combo_stack)
 
+    def open_arrays(self):
+        self.main_stack.setCurrentIndex(3)
+        self.nd_stack.setCurrentIndex(0)
+        self.arr_stack.setCurrentIndex(0)
+        self.ndActionComboBox.currentIndexChanged.connect(self.change_nd_stack)
+        self.arrActionComboBox.currentIndexChanged.connect(self.change_arr_stack)
+
     def change_combo_stack(self, page_id):
         self.combinatoric_stack.setCurrentIndex(page_id)
+
+    def change_nd_stack(self, page_id):
+        self.nd_stack.setCurrentIndex(page_id)
+
+    def change_arr_stack(self, page_id):
+        self.arr_stack.setCurrentIndex(page_id)
+
+    # TODO: merge arr_act & nd_act
+    def nd_act(self):
+        """
+        Функция управления односвязным списком.
+        """
+        action = self.ndActionComboBox.currentText()
+
+        if action == "Добавить":
+            items = self.addActionLineEdit_nd.text().split(' ')
+
+            for item in items:
+                self.node_array.add(arrays.Node(int(item)))
+
+        elif action == "Вставить":
+            position = int(self.insertPositionLineEdit_nd.text())
+            item = int(self.insertValueLineEdit_nd.text())
+
+            try:
+                self.node_array.insert_at(position, arrays.Node(item))
+            except Exception as e:
+                self.nd_result_text.setText(e.__str__())
+
+        elif action == "Удалить":
+            try:
+                self.node_array.remove()
+            except Exception as e:
+                self.nd_result_text.setText(e.__str__())
+                return
+
+        elif action == "Убрать элем.":
+            position = int(self.RemovePosLineEdit_nd.text())
+
+            try:
+                self.node_array.remove_at(position)
+            except Exception as e:
+                self.nd_result_text.setText(e.__str__())
+                return
+
+        else:
+            self.nd_result_text.setText("Неизвестная операция...")
+            return
+
+        self.nd_result_text.setText(self.node_array.__str__())
+
+    def arr_act(self):
+        """
+        Функция управления взаимодействия с массивом.
+        """
+        action = self.arrActionComboBox.currentText()
+
+        if action == "Добавить":
+            items = self.addActionLineEdit_arr.text().split(' ')
+
+            for item in items:
+                self.common_array.add(int(item))
+
+        elif action == "Вставить":
+            position = int(self.insertPositionLineEdit_arr.text())
+            item = int(self.insertValueLineEdit_arr.text())
+
+            try:
+                self.common_array.insert_at(position, item)
+            except Exception as e:
+                self.arr_result_text.setText(e.__str__())
+
+        elif action == "Удалить":
+            try:
+                self.common_array.remove()
+            except Exception as e:
+                self.arr_result_text.setText(e.__str__())
+                return
+
+        elif action == "Убрать элем.":
+            position = int(self.RemovePosLineEdit_arr.text())
+
+            try:
+                self.common_array.remove_at(position)
+            except Exception as e:
+                self.arr_result_text.setText(e.__str__())
+                return
+
+        else:
+            self.arr_result_text.setText("Неизвестная операция...")
+            return
+
+        self.arr_result_text.setText(self.common_array.__str__())
 
     def add_new_k_type(self):
         self.form_with_types.addRow(
