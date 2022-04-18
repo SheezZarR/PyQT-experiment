@@ -22,7 +22,7 @@ class Node:
     def get_next_node(self) -> Node:
         return self._next
 
-    def set_next_node(self, node: Node) -> None:
+    def set_next_node(self, node: any) -> None:
         self._next = node
 
 
@@ -80,14 +80,48 @@ class NodeArray:
 
         self._logic_size += 1
 
-    def insert_at(self, node: Node, pos: int) -> None:
-        pass
+    def insert_at(self, item_pos: int, node: Node) -> None:
+        if item_pos >= self._logic_size or item_pos < 0:
+            raise IndexError("Incorrect index!")
+
+        start = self._head
+        tmp = None
+
+        if item_pos == 0:
+            tmp = self._head
+            self._head = node
+            self._head.set_next_node(tmp)
+            self._logic_size += 1
+
+        else:
+            for i in range(item_pos - 1):
+                start = start.get_next_node()
+
+            tmp = start
+            start = start.get_next_node()
+            tmp.set_next_node(node)
+            node.set_next_node(start)
 
     def remove(self) -> None:
-        pass
+        start = self._head
+
+        for i in range(self._logic_size - 1):
+            start = start.get_next_node()
+
+        start.set_next_node(None)
 
     def remove_at(self, pos: int) -> None:
-        pass
+        if pos == 0:
+            self._head = self._head.get_next_node()
+
+        else:
+            start = self._head
+
+            for i in range(self.pos - 1):
+
+
+    def is_empty(self) -> bool:
+        return True if self._logic_size == 0 else False
 
 
 class CommonArray:
