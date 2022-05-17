@@ -1384,7 +1384,7 @@ p, li { white-space: pre-wrap; }
                   </sizepolicy>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>3</number>
                  </property>
                  <widget class="QWidget" name="nd_add">
                   <property name="sizePolicy">
