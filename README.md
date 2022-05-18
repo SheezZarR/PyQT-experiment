@@ -9,11 +9,12 @@ Repo contains one semester of tasks.
 - Create an array and sort it. Recreation of the qsort algorithm.
 
 ## Logic
-Files related to the handling the logic is in the `modules/` folder.
+To see the implementations of the above features see `modules/` folder.
 
 ## UI
-UI is generated with a help of QTDesigner Tool. UI is in the `qtdesigns/` folder. Transformation to the python class is made via `pyuic5` and the output is located in the `pages/` folder. 
+UI is generated with a help of QTDesigner Tool. UI is in `qtdesigns/` folder. Transformation to the python class is made via `pyuic5` and the output is located in `pages/` folder. 
 
 ## WIP
+- Refactoring of the arithmetics; 
 - A tree built on top off linked lists;
 - TBA...
