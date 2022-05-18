@@ -6,12 +6,13 @@ class ArrayBinTree:
     def __init__(self):
         pass
 
-    def resize(self, desired_size):
-        """ Resizes an array. """
+    def resize(self, desired_size: int) -> None:
+        """ Resizes a tree with empty. """
+
         for i in range(len(self._data), desired_size):
             self._data.append(None)
 
-    def add_element(self, element):
+    def add_element(self, element: int) -> None:
         """ Adds an element to the tree. """
 
         for i in range(len(self._data)):
@@ -21,8 +22,9 @@ class ArrayBinTree:
 
         self._data.append(element)
 
-    def insert_element(self, pos, element):
+    def insert_element(self, pos: int, element: int) -> None:
         """ Inserts an element at given position into the tree. """
+
         arr_size = len(self._data)
 
         parent = pos // 2 - 1 + (pos // 2) % 2
@@ -44,7 +46,7 @@ class ArrayBinTree:
 
         raise IndexError(f"Невозможно вставить элемент {element} на позицию {pos}. Нет родителя!")
 
-    def remove_element(self, pos):
+    def remove_element(self, pos: int) -> None:
         """ Removes an element at given position from the tree. """
 
         arr_size = len(self._data)
@@ -67,6 +69,7 @@ class ArrayBinTree:
 
     def show_tree(self) -> str:
         """ Returns a string representing the tree. """
+
         if len(self._data) == 0:
             return "Пустое дерево"
 
@@ -85,7 +88,9 @@ class ArrayBinTree:
 
         return result
 
-    def show_parent(self, elem) -> str:
+    def show_parent(self, elem: int) -> str:
+        """ Returns a string containing the parent element. """
+
         if self._data[0] == elem:
             return f"{elem} является корнем"
 
@@ -94,10 +99,12 @@ class ArrayBinTree:
 
         return f"Родитель {elem} элемент {self._data[parent]}"
 
-    def show_children(self, elem) -> str:
+    def show_children(self, elem: int) -> str:
+        """ Returns a string containing the children elements. """
+
         elem_ind = self._data.index(elem)
         arr_size = len(self._data)
-        print(self._data)
+
         left = self._data[elem_ind * 2 + 1] if elem_ind * 2 + 1 < arr_size else 'Нету'
         right = self._data[elem_ind * 2 + 2] if elem_ind * 2 + 2 < arr_size else 'Нету'
 
