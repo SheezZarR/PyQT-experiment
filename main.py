@@ -1,3 +1,4 @@
+import random
 import sys
 import math
 import PyQt5.QtWidgets as qtw
@@ -5,7 +6,7 @@ import PyQt5.QtGui as qtg
 import PyQt5.QtCore as qtc
 
 from pages import calc
-from modules import number_systems, combinatorics, arrays
+from modules import number_systems, combinatorics, arrays, qsort
 
 
 class App(qtw.QMainWindow, calc.Ui_mainWindow):
@@ -13,6 +14,7 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
 
     node_array = arrays.NodeArray()
     common_array = arrays.CommonArray()
+    arr_to_sort = []
 
     def __init__(self, parent=None):
         super(App, self).__init__(parent)
@@ -22,10 +24,12 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         self.open_calc.clicked.connect(self.open_calculator)
         self.open_comb.clicked.connect(self.open_combinatorics)
         self.open_arrs.clicked.connect(self.open_arrays)
+        self.open_sort.clicked.connect(self.open_algo)
 
         self.main_menu_button.clicked.connect(self.open_main_menu)
         self.comb_main_menu_button.clicked.connect(self.open_main_menu)
         self.arrays_main_menu_button.clicked.connect(self.open_main_menu)
+        self.sorting_algo_main_menu_button.clicked.connect(self.open_main_menu)
 
         self.calculate_button.clicked.connect(self.number_transform)
         self.comb_calculate_button.clicked.connect(self.calc_combinatorics)
@@ -52,6 +56,11 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         self.ndActionComboBox.currentIndexChanged.connect(self.change_nd_stack)
         self.arrActionComboBox.currentIndexChanged.connect(self.change_arr_stack)
 
+    def open_algo(self):
+        self.main_stack.setCurrentIndex(5)
+        self.generate_array.clicked.connect(self.array_generator)
+        self.sort_array_button.clicked.connect(self.sort_array)
+
     def change_combo_stack(self, page_id):
         self.combinatoric_stack.setCurrentIndex(page_id)
 
@@ -61,7 +70,7 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
     def change_arr_stack(self, page_id):
         self.arr_stack.setCurrentIndex(page_id)
 
-    # TODO: merge arr_act & nd_act
+    # TODO: merge arr_act & nd_act into separate file
     def nd_act(self):
         """
         Функция управления односвязным списком.
@@ -252,6 +261,19 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
                 ans = eval(str(n_) + oper_ + str(m_))
                 strr = number_systems.number_to_provided(ans, base_3_)
                 self.label_ans.setText(f'Ответ: {strr}')
+
+    def array_generator(self):
+        self.arr_to_sort = []
+        random.seed(random.random())
+
+        for i in range(random.randrange(1, 20, 1)):
+            self.arr_to_sort.append(random.randint(1, 1999321) % 100 * 7 % 100)
+
+        self.raw_array_text.setText(f"Массив: { self.arr_to_sort }")
+
+    def sort_array(self):
+        qsort.qsort(0, len(self.arr_to_sort) - 1, self.arr_to_sort)
+        self.sorted_array_text.setText(f"Результат: { self.arr_to_sort }")
 
 
 def main():
