@@ -6,7 +6,7 @@ import PyQt5.QtGui as qtg
 import PyQt5.QtCore as qtc
 
 from pages import calc
-from modules import number_systems, combinatorics, arrays, qsort
+from modules import number_systems, combinatorics, arrays, qsort, trees
 
 
 class App(qtw.QMainWindow, calc.Ui_mainWindow):
@@ -15,6 +15,7 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
     node_array = arrays.NodeArray()
     common_array = arrays.CommonArray()
     arr_to_sort = []
+    tree_array = trees.ArrayBinTree()
 
     def __init__(self, parent=None):
         super(App, self).__init__(parent)
@@ -24,11 +25,13 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         self.open_calc.clicked.connect(self.open_calculator)
         self.open_comb.clicked.connect(self.open_combinatorics)
         self.open_arrs.clicked.connect(self.open_arrays)
+        self.open_tree.clicked.connect(self.open_tree_menu)
         self.open_sort.clicked.connect(self.open_algo)
 
         self.main_menu_button.clicked.connect(self.open_main_menu)
         self.comb_main_menu_button.clicked.connect(self.open_main_menu)
         self.arrays_main_menu_button.clicked.connect(self.open_main_menu)
+        self.tree_main_menu_button.clicked.connect(self.open_main_menu)
         self.sorting_algo_main_menu_button.clicked.connect(self.open_main_menu)
 
         self.calculate_button.clicked.connect(self.number_transform)
@@ -56,6 +59,12 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
         self.ndActionComboBox.currentIndexChanged.connect(self.change_nd_stack)
         self.arrActionComboBox.currentIndexChanged.connect(self.change_arr_stack)
 
+    def open_tree_menu(self):
+        self.main_stack.setCurrentIndex(4)
+        self.tree_action_stack.setCurrentIndex(0)
+        self.tree_combo_box.currentIndexChanged.connect(self.change_tree_stack)
+        self.tree_run_action.clicked.connect(self.manage_tree_action)
+
     def open_algo(self):
         self.main_stack.setCurrentIndex(5)
         self.generate_array.clicked.connect(self.array_generator)
@@ -69,6 +78,44 @@ class App(qtw.QMainWindow, calc.Ui_mainWindow):
 
     def change_arr_stack(self, page_id):
         self.arr_stack.setCurrentIndex(page_id)
+
+    def change_tree_stack(self, page_id):
+        self.tree_action_stack.setCurrentIndex(page_id)
+
+    def manage_tree_action(self):
+        action_result = ""
+
+        if self.tree_combo_box.currentIndex() == 0:
+            # Add
+            elements = list(map(int, self.add_tree_elemLineEdit.text().split(' ')))
+
+            for elem in elements:
+                self.tree_array.add_element(elem)
+
+        elif self.tree_combo_box.currentIndex() == 1:
+            # Insert
+            element = int(self.insert_tree_elemLineEdit.text())
+            position = int(self.insert_tree_posLineEdit.text())
+            self.tree_array.insert_element(position, element)
+
+        elif self.tree_combo_box.currentIndex() == 2:
+            # Remove
+            element = int(self.remove_tree_elemLineEdit.text())
+            self.tree_array.remove_element(element)
+
+        elif self.tree_combo_box.currentIndex() == 3:
+            # Show parent
+            element = int(self.tree_childLineEdit.text())
+            action_result += self.tree_array.show_parent(element) + '\n'
+
+        elif self.tree_combo_box.currentIndex() == 4:
+            # Show children
+            element = int(self.tree_parentLineEdit.text())
+            action_result += self.tree_array.show_children(element) + '\n'
+
+        action_result += self.tree_array.show_tree()
+
+        self.tree_output_textBox.setText(action_result)
 
     # TODO: merge arr_act & nd_act into separate file
     def nd_act(self):

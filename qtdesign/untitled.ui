@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>656</width>
-    <height>429</height>
+    <width>739</width>
+    <height>496</height>
    </rect>
   </property>
   <property name="font">
@@ -30,7 +30,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="main_stack">
       <property name="currentIndex">
-       <number>5</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="controls">
        <widget class="QWidget" name="gridLayoutWidget">
@@ -38,8 +38,8 @@
          <rect>
           <x>170</x>
           <y>20</y>
-          <width>303</width>
-          <height>236</height>
+          <width>421</width>
+          <height>282</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
@@ -103,8 +103,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>641</width>
-          <height>361</height>
+          <width>727</width>
+          <height>441</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -121,6 +121,7 @@
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
+             <family>Ubuntu</family>
              <pointsize>24</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -364,8 +365,8 @@
          <rect>
           <x>-1</x>
           <y>-1</y>
-          <width>641</width>
-          <height>391</height>
+          <width>731</width>
+          <height>451</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
@@ -529,8 +530,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>629</width>
-                <height>226</height>
+                <width>627</width>
+                <height>224</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
@@ -597,6 +598,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <property name="font">
                       <font>
+                       <family>Ubuntu</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -615,6 +617,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <property name="font">
                       <font>
+                       <family>Ubuntu</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -981,8 +984,8 @@ p, li { white-space: pre-wrap; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>621</width>
-          <height>371</height>
+          <width>731</width>
+          <height>441</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_11">
@@ -1022,8 +1025,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>287</width>
-                <height>307</height>
+                <width>340</width>
+                <height>366</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_10">
@@ -1046,6 +1049,7 @@ p, li { white-space: pre-wrap; }
                 <widget class="QLabel" name="arr_label">
                  <property name="font">
                   <font>
+                   <family>Ubuntu</family>
                    <pointsize>12</pointsize>
                   </font>
                  </property>
@@ -1067,6 +1071,7 @@ p, li { white-space: pre-wrap; }
                   <widget class="QComboBox" name="arrActionComboBox">
                    <property name="font">
                     <font>
+                     <family>Ubuntu</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -1113,6 +1118,7 @@ p, li { white-space: pre-wrap; }
                  </property>
                  <property name="font">
                   <font>
+                   <family>Ubuntu</family>
                    <pointsize>12</pointsize>
                   </font>
                  </property>
@@ -1142,7 +1148,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>271</width>
-                     <height>42</height>
+                     <height>47</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout_21">
@@ -1178,7 +1184,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>271</width>
-                     <height>82</height>
+                     <height>90</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout_22">
@@ -1225,7 +1231,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>271</width>
-                     <height>42</height>
+                     <height>47</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout_23">
@@ -1293,8 +1299,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>288</width>
-                <height>307</height>
+                <width>341</width>
+                <height>366</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_7">
@@ -1317,6 +1323,7 @@ p, li { white-space: pre-wrap; }
                 <widget class="QLabel" name="nd_label">
                  <property name="font">
                   <font>
+                   <family>Ubuntu</family>
                    <pointsize>12</pointsize>
                   </font>
                  </property>
@@ -1338,6 +1345,7 @@ p, li { white-space: pre-wrap; }
                   <widget class="QComboBox" name="ndActionComboBox">
                    <property name="font">
                     <font>
+                     <family>Ubuntu</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -1384,6 +1392,7 @@ p, li { white-space: pre-wrap; }
                  </property>
                  <property name="font">
                   <font>
+                   <family>Ubuntu</family>
                    <pointsize>12</pointsize>
                   </font>
                  </property>
@@ -1413,7 +1422,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>271</width>
-                     <height>42</height>
+                     <height>47</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout_13">
@@ -1449,7 +1458,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>271</width>
-                     <height>82</height>
+                     <height>90</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout_14">
@@ -1496,7 +1505,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>271</width>
-                     <height>42</height>
+                     <height>47</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout_15">
@@ -1556,8 +1565,8 @@ p, li { white-space: pre-wrap; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>641</width>
-          <height>381</height>
+          <width>721</width>
+          <height>441</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_8">
@@ -1577,6 +1586,7 @@ p, li { white-space: pre-wrap; }
           <widget class="QLabel" name="tree_label">
            <property name="font">
             <font>
+             <family>Ubuntu</family>
              <pointsize>24</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1588,10 +1598,10 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QTextBrowser" name="treeBox"/>
+          <widget class="QTextBrowser" name="tree_output_textBox"/>
          </item>
          <item row="1" column="0">
-          <widget class="QComboBox" name="comboBox_2">
+          <widget class="QComboBox" name="tree_combo_box">
            <item>
             <property name="text">
              <string>Добавить элемент</string>
@@ -1619,6 +1629,20 @@ p, li { white-space: pre-wrap; }
            </item>
           </widget>
          </item>
+         <item row="5" column="0">
+          <widget class="QPushButton" name="tree_main_menu_button">
+           <property name="text">
+            <string>Вернуться</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="tree_run_action">
+           <property name="text">
+            <string>Выполнить</string>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0">
           <widget class="QStackedWidget" name="tree_action_stack">
            <property name="currentIndex">
@@ -1630,19 +1654,19 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>621</width>
-               <height>41</height>
+               <width>711</width>
+               <height>48</height>
               </rect>
              </property>
              <layout class="QFormLayout" name="formLayout_8">
               <property name="leftMargin">
-               <number>6</number>
+               <number>5</number>
               </property>
               <property name="topMargin">
-               <number>6</number>
+               <number>5</number>
               </property>
               <property name="rightMargin">
-               <number>6</number>
+               <number>5</number>
               </property>
               <property name="bottomMargin">
                <number>6</number>
@@ -1666,8 +1690,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>621</width>
-               <height>41</height>
+               <width>711</width>
+               <height>49</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_12">
@@ -1712,8 +1736,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>631</width>
-               <height>34</height>
+               <width>711</width>
+               <height>39</height>
               </rect>
              </property>
              <layout class="QFormLayout" name="formLayout_9">
@@ -1730,22 +1754,78 @@ p, li { white-space: pre-wrap; }
              </layout>
             </widget>
            </widget>
-           <widget class="QWidget" name="show_parent"/>
-           <widget class="QWidget" name="show_children"/>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="tree_run_action">
-           <property name="text">
-            <string>Выполнить</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QPushButton" name="tree_main_menu_button">
-           <property name="text">
-            <string>Вернуться</string>
-           </property>
+           <widget class="QWidget" name="show_parent">
+            <widget class="QWidget" name="formLayoutWidget_4">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>711</width>
+               <height>47</height>
+              </rect>
+             </property>
+             <layout class="QFormLayout" name="formLayout_10">
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>5</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>5</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="tree_childLabel">
+                <property name="text">
+                 <string>Элемент-потомок: </string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="tree_childLineEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="show_children">
+            <widget class="QWidget" name="formLayoutWidget_5">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>711</width>
+               <height>47</height>
+              </rect>
+             </property>
+             <layout class="QFormLayout" name="formLayout_11">
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>5</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>5</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="tree_parentLabel">
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Элемент-родитель:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="tree_parentLineEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -1757,8 +1837,8 @@ p, li { white-space: pre-wrap; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>641</width>
-          <height>381</height>
+          <width>721</width>
+          <height>441</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_13">
@@ -1778,6 +1858,7 @@ p, li { white-space: pre-wrap; }
           <widget class="QLabel" name="algo_label">
            <property name="font">
             <font>
+             <family>Ubuntu</family>
              <pointsize>24</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -1850,8 +1931,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>656</width>
-     <height>29</height>
+     <width>739</width>
+     <height>35</height>
     </rect>
    </property>
   </widget>
